@@ -2,6 +2,8 @@
 
 My personal portfolio — an interactive, motion-first website showcasing my projects, product thinking and campus leadership.
 
+**🌐 Live:** [kumar-aryan.vercel.app](https://kumar-aryan.vercel.app)
+
 **Author:** [Kumar Aryan](https://www.linkedin.com/in/kumar-aryan-871294333) · ECE @ IIIT Nagpur '28
 
 ## ✨ Highlights
