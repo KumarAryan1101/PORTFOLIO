@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream text-black font-display antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #c3ff00;
+  color: #000;
+}
+
+.grid-paper {
+  background-image: linear-gradient(#00000008 1px, transparent 1px),
+    linear-gradient(90deg, #00000008 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.text-stroke {
+  -webkit-text-stroke: 2px black;
+  color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-left: 2px solid black;
+}
+::-webkit-scrollbar-thumb {
+  background: black;
+  border: 3px solid #f0f0f0;
+  border-radius: 8px;
+}
