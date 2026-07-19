@@ -21,12 +21,12 @@ export const About = () => (
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
-          className="overflow-hidden rounded-xl border-3 border-black shadow-brutal-xl"
+          className="min-w-0 overflow-hidden rounded-xl border-3 border-black bg-black shadow-brutal-xl"
         >
           <RevealWaveImage src={profile.avatar} className="h-[380px] w-full" />
         </motion.div>
 
-        <div className="space-y-6">
+        <div className="min-w-0 space-y-6">
           <TiltCard>
             <h3 className="mb-2 text-xl font-black">The short version</h3>
             <p className="text-sm font-medium leading-relaxed text-gray-700">
