@@ -122,6 +122,7 @@ interface ImagePlaneProps {
   waveAmplitude: number;
   mouseRadius: number;
   isMouseInCanvas: boolean;
+  autoMode: boolean;
 }
 
 function ImagePlane({
@@ -135,6 +136,7 @@ function ImagePlane({
   waveAmplitude,
   mouseRadius,
   isMouseInCanvas,
+  autoMode,
 }: ImagePlaneProps) {
   const texture = useTexture(src);
   const meshRef = useRef<THREE.Mesh>(null);
@@ -178,7 +180,20 @@ function ImagePlane({
   useFrame((state) => {
     if (meshRef.current) {
       const material = meshRef.current.material as THREE.ShaderMaterial;
-      material.uniforms.uTime.value = state.clock.elapsedTime;
+      const t = state.clock.elapsedTime;
+      material.uniforms.uTime.value = t;
+
+      // touch devices: no cursor, so the flashlight wanders on its own
+      // in a smooth lissajous path across the image
+      if (autoMode) {
+        material.uniforms.uMouseActive.value +=
+          (1 - material.uniforms.uMouseActive.value) * 0.05;
+        material.uniforms.uMouse.value.set(
+          0.5 + 0.32 * Math.sin(t * 0.55),
+          0.5 + 0.3 * Math.sin(t * 0.38 + 1.3)
+        );
+        return;
+      }
 
       if (isMouseInCanvas) {
         hasEnteredRef.current = true;
@@ -236,6 +251,12 @@ export const RevealWaveImage = ({
 }: RevealWaveImageProps) => {
   const [isMouseInCanvas, setIsMouseInCanvas] = useState(false);
   const [aspectRatio, setAspectRatio] = useState<number | null>(null);
+  // devices without a fine hover pointer (phones/tablets) get auto mode
+  const [autoMode] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      !window.matchMedia("(hover: hover) and (pointer: fine)").matches
+  );
 
   useEffect(() => {
     const img = new Image();
@@ -269,6 +290,7 @@ export const RevealWaveImage = ({
             waveAmplitude={waveAmplitude}
             mouseRadius={mouseRadius}
             isMouseInCanvas={isMouseInCanvas}
+            autoMode={autoMode}
           />
         </Canvas>
       )}

@@ -27,7 +27,7 @@ export const Home = () => {
   return (
   <Page>
     {/* ================= HERO ================= */}
-    <section className="relative min-h-screen overflow-hidden pt-28">
+    <section className="relative overflow-hidden pt-28">
       <BackgroundEffects />
       <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-10 px-4 pb-16 lg:grid-cols-2">
         <div>
